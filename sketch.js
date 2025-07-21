@@ -25,22 +25,22 @@ function setupCamera() {
 function createUI() {
   colorDisplay = select('#colorDisplay');
 
-  flipCameraButton = createButton("↔️ 카메라 좌우 반전").mousePressed(toggleFlip);
+  flipCameraButton = createButton("↔️ Flip Camera Horizontally").mousePressed(toggleFlip);
   flipCameraButton.parent('camera-control-buttons');
 
-  switchCameraButton = createButton("🔄 전후방 카메라 전환").mousePressed(switchCamera);
+  switchCameraButton = createButton("🔄 Switch Front/Back Camera").mousePressed(switchCamera);
   switchCameraButton.parent('camera-control-buttons');
 
-  connectBluetoothButton = createButton("🔗 블루투스 연결").mousePressed(connectBluetooth);
+  connectBluetoothButton = createButton("🔗 Connect").mousePressed(connectBluetooth);
   connectBluetoothButton.parent('bluetooth-control-buttons');
 
-  disconnectBluetoothButton = createButton("❌ 블루투스 연결 해제").mousePressed(disconnectBluetooth);
+  disconnectBluetoothButton = createButton("❌ Disconnect").mousePressed(disconnectBluetooth);
   disconnectBluetoothButton.parent('bluetooth-control-buttons');
 
-  startDetectionButton = createButton("🟢 색상 감지 시작").mousePressed(startColorDetection);
+  startDetectionButton = createButton("🟢 Start Color Detection").mousePressed(startColorDetection);
   startDetectionButton.parent('object-control-buttons');
 
-  stopDetectionButton = createButton("🔴 색상 감지 중지").mousePressed(stopColorDetection);
+  stopDetectionButton = createButton("🔴 Stop Color Detection").mousePressed(stopColorDetection);
   stopDetectionButton.parent('object-control-buttons');
 
   updateBluetoothStatus();
@@ -76,7 +76,7 @@ function draw() {
     const sendData = `R${String(r).padStart(3, "0")}G${String(g).padStart(3, "0")}B${String(b).padStart(3, "0")}`;
     
     sendBluetoothData(sendData);
-    colorDisplay.html(`마이크로비트로 전송된 데이터: ${displayData}`);
+    colorDisplay.html(`Data sent to micro:bit: ${displayData}`);
   }
 
   if (isFlipped) {
@@ -138,7 +138,7 @@ function disconnectBluetooth() {
 
 function updateBluetoothStatus() {
   const statusElement = select('#bluetoothStatus');
-  statusElement.html(`상태: ${bluetoothStatus}`);
+  statusElement.html(`Status: ${bluetoothStatus}`);
   statusElement.style('background-color', isConnected ? '#d0f0fd' : '#f9f9f9');
   statusElement.style('color', isConnected ? '#78B3FF' : '#FE818D');
 }
@@ -164,7 +164,7 @@ async function sendBluetoothData(data) {
 
 function startColorDetection() {
   if (!isConnected) {
-    alert("블루투스가 연결되어 있지 않습니다.");
+    alert("Bluetooth is not connected.");
     return;
   }
   isColorDetectionActive = true;
@@ -173,7 +173,7 @@ function startColorDetection() {
 function stopColorDetection() {
   isColorDetectionActive = false;
   sendBluetoothData("stop");
-  colorDisplay.html("마이크로비트로 전송된 데이터: 없음");
+  colorDisplay.html("Data sent to micro:bit: None");
 }
 
 function toggleFlip() {
