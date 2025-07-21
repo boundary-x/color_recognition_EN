@@ -25,10 +25,10 @@ function setupCamera() {
 function createUI() {
   colorDisplay = select('#colorDisplay');
 
-  flipCameraButton = createButton("↔️ Flip Camera Horizontally").mousePressed(toggleFlip);
+  flipCameraButton = createButton("↔️ Flip Camera").mousePressed(toggleFlip);
   flipCameraButton.parent('camera-control-buttons');
 
-  switchCameraButton = createButton("🔄 Switch Front/Back Camera").mousePressed(switchCamera);
+  switchCameraButton = createButton("🔄 Switch Camera").mousePressed(switchCamera);
   switchCameraButton.parent('camera-control-buttons');
 
   connectBluetoothButton = createButton("🔗 Connect").mousePressed(connectBluetooth);
